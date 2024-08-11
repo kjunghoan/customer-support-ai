@@ -1,0 +1,27 @@
+.custom-scrollbar {
+    position: relative; /* Ensure the scrollbar is relative to the container */
+    padding-right: 10px; /* Add padding to push the scrollbar closer to the right edge */
+    scrollbar-width: thin;
+    scrollbar-color: #007bff #2c2c2c;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    position: absolute; /* Position the scrollbar to align it with the container edge */
+    right: 0; /* Align scrollbar to the right */
+    top: 0; /* Align scrollbar to the top */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #2c2c2c; /* Background of the scrollbar track */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Roundness of the scrollbar handle */
+    border: 2px solid #2c2c2c; /* Padding around the scrollbar handle */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #0056b3; /* Color of the scrollbar handle on hover */
+  }

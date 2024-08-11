@@ -2,16 +2,17 @@
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { sendMessage } from '../lib/sendMessage';
+import './Chat.module.css';
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { // This is the state that will hold the messages
+    {
       role: 'assistant',
       content: `Hello, how can I help you today?`,
     }
   ]);
-  const [input, setInput] = useState(''); // This is the state that will hold the user's input
-  const [isLoading, setIsLoading] = useState(false); // This is the state that will hold the loading state
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -26,20 +27,24 @@ const Chat: React.FC = () => {
   return (
     <div id='supportChat'>
       <Box
-        width="100%"
-        height="100%"
+        width="100vw"
+        height="100vh"
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
+        bgcolor="#2c2c2c"
       >
         <Stack
           direction="column"
           width="600px"
-          height="700px"
-          border="1px solid black"
+          height="750px"
+          border="1px solid #444"
+          bgcolor="#3c3c3c"
           p={2}
           spacing={3}
+          borderRadius={4}
+          className="custom-scrollbar"
         >
           <Stack
             direction="column"
@@ -47,6 +52,7 @@ const Chat: React.FC = () => {
             flexGrow={1}
             overflow="auto"
             maxHeight="100%"
+            className="custom-scrollbar"
           >
             {
               messages.map((message: Message, index: number) => {
@@ -65,6 +71,9 @@ const Chat: React.FC = () => {
                       color="white"
                       borderRadius={16}
                       p={3}
+                      maxWidth="73%"
+                      fontSize="0.95rem"
+                      lineHeight="1.4"
                     >
                       {message.content}
                     </Box>
@@ -83,9 +92,26 @@ const Chat: React.FC = () => {
               fullWidth
               value={input}
               onChange={(event) => setInput(event.target.value)}
+              variant="outlined"
+              InputProps={{
+                style: {
+                  color: 'white',
+                  backgroundColor: '#4c4c4c',
+                  borderRadius: 8,
+                },
+              }}
+              InputLabelProps={{
+                style: { color: 'lightgray' },
+              }}
             />
             <Button
               variant="contained"
+              sx={{
+                bgcolor: '#007bff',
+                '&:hover': {
+                  bgcolor: '#0056b3',
+                },
+              }}
               onClick={() => {
                 if (!isLoading) {
                   sendMessage(messages, input, setInput, setMessages, isLoading, setIsLoading)
